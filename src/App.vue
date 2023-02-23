@@ -1,31 +1,16 @@
 <script setup lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { useGenericComponent } from './Composables/useGenericComponent';
 
-function useGenericComponent<TValue = unknown>() {
-  const GenericComponent = defineComponent({
-    props: {
-      value: {
-        type: null as unknown as PropType<TValue>,
-        required: true,
-      },
-    },
-
-    render: () => h('div', props.value),
-  });
-
-  return GenericComponent;
-}
-
+const StringComponent = useGenericComponent<string>();
 interface User {
   id: number;
   name: string;
 }
-
-const StringComponent = useGenericComponent<string>();
-const UserComponent = useGenericComponent<User>();
+const ObjectComponent = useGenericComponent<User>();
 </script>
 
 <template>
-  <StringComponent value="Hello" />
-  <UserComponent :value="{ id: 1, name: 'Awad' }" />
+  <StringComponent value="hello" />
+
+  <ObjectComponent :value="{ id: 1, name: 'Awad' }" />
 </template>
