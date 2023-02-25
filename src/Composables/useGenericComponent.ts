@@ -1,5 +1,6 @@
 import { defineComponent, h } from 'vue';
 import BaseGenericComponent from '../components/BaseGenericComponent.vue';
+import { ExtractComponentProps } from '../types';
 
 interface GenericProps<TValue> extends Omit<ExtractComponentProps<typeof BaseGenericComponent>, 'value'> {
   value: TValue

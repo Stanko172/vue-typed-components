@@ -2,15 +2,17 @@
 import { useGenericComponent } from './Composables/useGenericComponent';
 
 const StringComponent = useGenericComponent<string>();
-interface User {
+
+interface Cat {
   id: number;
   name: string;
 }
-const ObjectComponent = useGenericComponent<User>();
+
+const ObjectComponent = useGenericComponent<Cat>();
 </script>
 
 <template>
-  <StringComponent value="hello" />
+  <StringComponent value="Hello World!" />
 
-  <ObjectComponent :value="{ id: 1, name: 'Awad' }" />
+  <ObjectComponent :value="{ id: 1, name: 'Fluffmaster' }" />
 </template>
