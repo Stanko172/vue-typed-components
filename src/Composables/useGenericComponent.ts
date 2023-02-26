@@ -2,7 +2,9 @@ import { VNode, defineComponent, h } from 'vue';
 import BaseGenericComponent from '../components/BaseGenericComponent.vue';
 import { ExtractComponentProps } from '../types';
 
-interface GenericProps<TValue> extends Omit<ExtractComponentProps<typeof BaseGenericComponent>, 'value'> {
+type NonGenericProps = Omit<ExtractComponentProps<typeof BaseGenericComponent>, 'value' | 'onChanged'>;
+
+interface GenericProps<TValue> extends NonGenericProps {
   value: TValue
 }
 
@@ -18,6 +20,9 @@ export function useGenericComponent<TValue = unknown>() {
 
   return wrapper as typeof wrapper & {
     new (): {
+      $emit: {
+        (e: 'changed', value: TValue): void;
+      },
       $slots: {
         default: (arg: GenericSlotProps<TValue>) => VNode[];
       }
